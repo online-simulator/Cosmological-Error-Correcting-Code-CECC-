@@ -134,6 +134,34 @@ class CosmologicalErrorCorrectingCode:
         # Extract無傷 (pure) logical data from the 51 matter-payload bits
         corrected_logical_data = noisy_physical_block[:51]
         return corrected_logical_data
+
+# ==========================================
+# 🔍 H行列の即座確認セクション
+# ==========================================
+if __name__ == "__main__":
+    print("--- 処理を開始します ---")
+    
+    # クラスのインスタンス化
+    cecc = CosmologicalErrorCorrectingCode()
+    
+    # H行列を抽出し、float型へ変換
+    H = cecc.H_matrix.astype(float)
+    
+    # 結果の出力
+    print(f"■ 行列 H の形状 (Shape)    : {H.shape}")
+    print(f"■ 行列 H のデータ型 (dtype) : {H.dtype}")
+    print(f"■ 行列 H の左上 5x5 の要素  :\n{H[:5, :5]}")
+    print("\n--- 正常に確認できました ---")
+
+    # 実対称行列専用の高速・高精度な固有値解析を実行
+    eigenvalues, eigenvectors = np.linalg.eigh(H)
+
+    # 四捨五入して綺麗にカウント
+    rounded_vals = np.round(eigenvalues, 4)
+    unique, counts = np.unique(rounded_vals, return_counts=True)
+
+    for val, count in zip(unique, counts):
+        print(f"固有値: {val:6.1f} | 重複度 (個数): {count}")
 ```
 
 ------------------------------
