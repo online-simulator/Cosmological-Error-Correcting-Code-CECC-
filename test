@@ -1,3 +1,4 @@
-target: rank(H_matrix1536x1536)=51+72=123 eigenvalues lie on a modular hypersphere as "critical line"
+target: manifold rank(H_matrix)=rank_target eigenvalues lie on "critical line" as GUE statistics
 
+entry 2026.08.11_2: uniform dissipation mechanics enabled without active decoding
 entry 2026.08.11: rank(H_matrix1536x1536)=2 -> full degeneracy
